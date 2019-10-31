@@ -3,7 +3,7 @@ package com.example.study.repository;
 import com.example.study.StudyApplicationTests;
 import com.example.study.model.entity.User;
 import org.junit.Assert;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +17,7 @@ public class UserRepositoryTest extends StudyApplicationTests {
     private UserRepository userRepository;
 
     @Test
+    @Transactional
     public void create() {
         User user = new User();
 
@@ -42,6 +43,7 @@ public class UserRepositoryTest extends StudyApplicationTests {
     }
 
     @Test
+    @Transactional
     public void update() {
         Optional<User> user = userRepository.findById(3L);
 
