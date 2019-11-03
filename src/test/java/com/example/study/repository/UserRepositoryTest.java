@@ -1,6 +1,7 @@
 package com.example.study.repository;
 
 import com.example.study.StudyApplicationTests;
+import com.example.study.model.entity.Item;
 import com.example.study.model.entity.User;
 import org.junit.Assert;
 import org.junit.Test;
@@ -17,7 +18,7 @@ public class UserRepositoryTest extends StudyApplicationTests {
     private UserRepository userRepository;
 
     @Test
-    @Transactional
+//    @Transactional
     public void create() {
         User user = new User();
 
@@ -33,11 +34,14 @@ public class UserRepositoryTest extends StudyApplicationTests {
 
     @Test
     public void read() {
-        Optional<User> user = userRepository.findById(3L);
+        Long id = 1L;
+        Optional<User> user = userRepository.findById(id);
 
-        user.ifPresent(selectedUser -> {
-            System.out.println("User : " + selectedUser);
-            System.out.print("email : " + selectedUser.getEmail());
+        user.ifPresent(selectedUser ->{
+            selectedUser.getOrderDetailList().stream().forEach(detail -> {
+                Item item = detail.getItem();
+                System.out.println(item);
+            });
         });
 
     }
