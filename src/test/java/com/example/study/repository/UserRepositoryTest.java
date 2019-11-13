@@ -20,35 +20,35 @@ public class UserRepositoryTest extends StudyApplicationTests {
     @Test
 //    @Transactional
     public void create() {
-        User user = new User();
+        String account = "Test01";
+        String password = "Test01";
+        String status = "REGISTERED";
+        String email = "Test01@gmail.com";
+        String phoneNumber = "010-111-2222";
+        LocalDateTime registeredAt = LocalDateTime.now();
+        LocalDateTime createdAt = LocalDateTime.now();
+        String createdBy = "AdminServer";
 
-        user.setAccount("TestUser02");
-        user.setEmail("TestUser02@email.com");
-        user.setPhoneNumber("010-2222-2222");
-        user.setCreatedAt(LocalDateTime.now());
-        user.setCreatedBy("TestUser02");
+        User user = new User();
+        user.setAccount(account);
+        user.setPassword(password);
+        user.setStatus(status);
+        user.setEmail(email);
+        user.setPhoneNumber(phoneNumber);
+        user.setRegisteredAt(registeredAt);
+        user.setCreatedAt(createdAt);
+        user.setCreatedBy(createdBy);
 
         User newUser = userRepository.save(user);
-        System.out.println("newUser: " + newUser);
+        Assert.assertNotNull(newUser);
     }
 
     @Test
     @Transactional
     public void read() {
-//        Long id = 1L;
-//        Optional<User> user = userRepository.findById(id);
-        String account = "TestUser02";
-
-        // SELECT * FROM USER WHERE ACCOUNT = account;
-        Optional<User> user = userRepository.findByAccount(account);
-
-        user.ifPresent(selectedUser ->{
-            selectedUser.getOrderDetailList().forEach(detail -> {
-                Item item = detail.getItem();
-                System.out.println(item);
-            });
-        });
-
+        String phoneNumber = "010-111-2222";
+        User user = userRepository.findFirstByPhoneNumberOrderByIdDesc(phoneNumber);
+        Assert.assertNotNull(user);
     }
 
     @Test

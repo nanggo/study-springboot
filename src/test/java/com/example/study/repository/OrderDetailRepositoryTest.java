@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.jupiter.api.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -18,9 +19,15 @@ public class OrderDetailRepositoryTest extends StudyApplicationTests {
     public void create() {
         OrderDetail orderDetail = new OrderDetail();
 
-        orderDetail.setOrderAt(LocalDateTime.now());
-//        orderDetail.setItemId(1L);
-//        orderDetail.setUserId(8L);
+        orderDetail.setStatus("WAITING");
+        orderDetail.setArrivalDate(LocalDateTime.now().plusDays(2));
+        orderDetail.setQuantity(1);
+        orderDetail.setTotalPrice(BigDecimal.valueOf(900000));
+        orderDetail.setCreatedAt(LocalDateTime.now());
+        orderDetail.setCreatedBy("AdminServer");
+
+        orderDetail.setOrderGroupId(1L);    // 어떤 장바구니
+        orderDetail.setItemId(1L);  // 어떤 상품
 
         OrderDetail newOrderDetail = orderDetailRepository.save(orderDetail);
 
@@ -29,7 +36,7 @@ public class OrderDetailRepositoryTest extends StudyApplicationTests {
 
     @Test
     public void read() {
-        Long id = 1L;
+        Long id = 2L;
         Optional<OrderDetail> orderDetail = orderDetailRepository.findById(id);
 
         Assert.assertTrue(orderDetail.isPresent());

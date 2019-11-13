@@ -42,7 +42,7 @@ public class AdminUser {
 
     private String createdBy;
 
-    private LocalDateTime updateAt;
+    private LocalDateTime updatedAt;
 
     private String updatedBy;
 }

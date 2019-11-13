@@ -48,4 +48,6 @@ public class OrderGroup {
 
     private LocalDateTime updatedBy;
 
+    private Long userId;
+
 }
